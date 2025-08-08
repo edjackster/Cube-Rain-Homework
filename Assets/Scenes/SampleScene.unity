@@ -962,9 +962,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610f6a99021b38c46a7bf3cf73b3139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnDelay: 0.1
+  _spawnDelay: 0.2
   _poolCapacity: 10
   _poolMaxSize: 100
+  _spawnsCount: 4
   _prefab: {fileID: 4488140460028262753, guid: 8f306e2ef294b0f4288c12275492fd90, type: 3}
 --- !u!4 &1794809547
 Transform:

@@ -1,15 +1,18 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private float _spawnDelay = 1f;
-    [SerializeField] private int _poolCapacity = 10;
-    [SerializeField] private int _poolMaxSize = 100;
+    [SerializeField, Range(.01f, 10)] private float _spawnDelay = 1f;
+    [SerializeField, Min(1)] private int _poolCapacity = 10;
+    [SerializeField, Min(1)] private int _poolMaxSize = 100;
+    [SerializeField, Range(1,10)] private int _spawnsCount = 4;
     [SerializeField] private Cube _prefab;
     
     private Color _standartColor = Color.gray;
     private ObjectPool<Cube> _cubesPool;
+    private bool _canSpawn = false;
 
     private void Awake()
     {
@@ -27,8 +30,9 @@ public class Spawner : MonoBehaviour
 
         if(_prefab.TryGetComponent<Renderer>(out var renderer) == true)
             _standartColor = renderer.sharedMaterial.color;
-
-        InvokeRepeating(nameof(SpawnCube), startTime, _spawnDelay);
+        
+        _canSpawn = true;
+        StartCoroutine(SpawnCube());
     }
 
     private void OnDrawGizmos()
@@ -39,9 +43,17 @@ public class Spawner : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, size);
     }
 
-    private void SpawnCube()
+    private IEnumerator SpawnCube()
     {
-        _cubesPool.Get();
+        int i;
+
+        while (_canSpawn)
+        {
+            for(i = 0; i<_spawnsCount; i++)
+                _cubesPool.Get();
+            
+            yield return new WaitForSeconds(_spawnDelay);
+        }
     }
 
     private void GetCube(Cube cube)

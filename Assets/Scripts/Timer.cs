@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
 [RequireComponent(typeof(Cube))]
 public class Timer : MonoBehaviour
@@ -8,16 +8,16 @@ public class Timer : MonoBehaviour
     [SerializeField] private float _minTime = 2;
     [SerializeField] private float _maxTime = 5;
 
-    public event UnityAction TimesUp;
+    public event Action TimesUp;
 
     public void StartCountdown()
     {
-        float time = Random.Range(_minTime, _maxTime);
+        float time = UnityEngine.Random.Range(_minTime, _maxTime);
 
-        StartCoroutine(nameof(Countdown), time);
+        StartCoroutine(Countdown(time));
     }
 
-    private IEnumerator Countdown(int delay)
+    private IEnumerator Countdown(float delay)
     {
         yield return new WaitForSeconds(delay);
 
