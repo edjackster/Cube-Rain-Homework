@@ -1,16 +1,14 @@
 using System;
 using UnityEngine;
-using UnityEngine.Pool;
 
 [RequireComponent(typeof(Timer), typeof(ColorChanger))]
 public class Cube : MonoBehaviour
 {
-    public event Action<Cube> Die;
-
     private ColorChanger _colorChanger;
     private Timer _timer;
-    
     private bool _isHitted = false;
+
+    public event Action<Cube> Died;
 
     private void Awake()
     {
@@ -20,12 +18,12 @@ public class Cube : MonoBehaviour
 
     private void OnEnable()
     {
-        _timer.TimerUp += OnTimerUp;
+        _timer.TimesUp += OnTimerUp;
     }
 
     private void OnDisable()
     {
-        _timer.TimerUp -= OnTimerUp;
+        _timer.TimesUp -= OnTimerUp;
     }
 
     public void RollBack()
@@ -34,8 +32,11 @@ public class Cube : MonoBehaviour
         _isHitted = false;
     }
 
-    public void OnPlatformCollisionEnter()
+    private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.TryGetComponent<Wall>(out var wall) == false)
+            return;
+
         if (_isHitted)
             return;
 
@@ -46,6 +47,6 @@ public class Cube : MonoBehaviour
 
     private void OnTimerUp()
     {
-        Die?.Invoke(this);
+        Died?.Invoke(this);
     }
 }

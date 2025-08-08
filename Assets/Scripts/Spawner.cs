@@ -62,7 +62,7 @@ public class Spawner : MonoBehaviour
 
     private void DestroyCube(Cube cube)
     {
-        cube.Die -= OnCubeDie;
+        cube.Died -= OnCubeDie;
         Destroy(cube.gameObject);
     }
 
@@ -70,7 +70,7 @@ public class Spawner : MonoBehaviour
     {
         var postion = GetRandomPosition();
         var cube = Instantiate(_prefab, postion, Quaternion.identity);
-        cube.Die += OnCubeDie;
+        cube.Died += OnCubeDie;
 
         return cube;
     }
