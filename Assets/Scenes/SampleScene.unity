@@ -965,7 +965,7 @@ MonoBehaviour:
   _spawnDelay: 0.2
   _poolCapacity: 10
   _poolMaxSize: 100
-  _spawnsCount: 4
+  _spawnsCount: 6
   _prefab: {fileID: 4488140460028262753, guid: 8f306e2ef294b0f4288c12275492fd90, type: 3}
 --- !u!4 &1794809547
 Transform:

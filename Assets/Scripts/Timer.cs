@@ -2,13 +2,15 @@ using System.Collections;
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(Cube))]
 public class Timer : MonoBehaviour
 {
+    private const float Tick = 0.01f;
+
     [SerializeField] private float _minTime = 2;
     [SerializeField] private float _maxTime = 5;
 
     public event Action TimesUp;
+    public event Action<float> TimeChanged;
 
     public void StartCountdown()
     {
@@ -19,7 +21,14 @@ public class Timer : MonoBehaviour
 
     private IEnumerator Countdown(float delay)
     {
-        yield return new WaitForSeconds(delay);
+        var wait = new WaitForSeconds(Tick);
+        int ticksCount = (int)(delay / Tick);
+
+        for (int i = 0; i < ticksCount; i++)
+        {
+            yield return wait;
+            TimeChanged?.Invoke(1 - (float)i / ticksCount);
+        }
 
         TimesUp?.Invoke();
     }
