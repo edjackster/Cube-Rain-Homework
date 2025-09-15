@@ -815,6 +815,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1269248055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1269248056}
+  - component: {fileID: 1269248057}
+  m_Layer: 0
+  m_Name: BombSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1269248056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269248055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -21.899076, y: -4.3931065, z: 14.632973}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1269248057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269248055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d97ffb1e06933c4b9b3c437f0adc962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolCapacity: 10
+  _poolMaxSize: 100
+  Prefab: {fileID: 4942175540658391001, guid: 680b68160d0942746bb81d3db617a9fe, type: 3}
 --- !u!1 &1439062123
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,7 +991,7 @@ GameObject:
   - component: {fileID: 1794809547}
   - component: {fileID: 1794809546}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: CubeSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -962,11 +1009,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610f6a99021b38c46a7bf3cf73b3139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnDelay: 0.2
   _poolCapacity: 10
   _poolMaxSize: 100
-  _spawnsCount: 6
-  _prefab: {fileID: 4488140460028262753, guid: 8f306e2ef294b0f4288c12275492fd90, type: 3}
+  Prefab: {fileID: 4488140460028262753, guid: 8f306e2ef294b0f4288c12275492fd90, type: 3}
+  _spawnDelay: 0.3
+  _spawnsCount: 4
+  _bombSpawner: {fileID: 1269248057}
 --- !u!4 &1794809547
 Transform:
   m_ObjectHideFlags: 0
@@ -991,3 +1039,4 @@ SceneRoots:
   - {fileID: 1439062127}
   - {fileID: 138685306}
   - {fileID: 1794809547}
+  - {fileID: 1269248056}
